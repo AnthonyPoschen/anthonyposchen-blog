@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package frontend;
+
+service APIService {
+	rpc test(test) returns (test) {}
+}
+
+message test {
+	string text = 1;
+}
