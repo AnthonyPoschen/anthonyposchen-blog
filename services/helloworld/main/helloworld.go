@@ -11,7 +11,7 @@ import (
 
 	"github.com/gobuffalo/packr"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	pb "github.com/zanven42/grpc-web-react-mobx/services/helloworld"
+	pb "github.com/zanven42/anthonyposchen-blog/services/helloworld"
 	"google.golang.org/grpc"
 )
 

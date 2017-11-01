@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package frontend;
 
-service APIService {
-	rpc test(test) returns (test) {}
+service FrontendService {
+	rpc test(testMsg) returns (testMsg) {}
 }
 
-message test {
+message testMsg {
 	string text = 1;
 }
