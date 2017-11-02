@@ -27,7 +27,6 @@ message GetMultiBlogRequest {
 	int64 start = 2;
 	int64 number = 3;
 	repeated Filter filter = 4;
-	string error = 404;
 }
 
 message GetMultiBlogResponse {
@@ -37,6 +36,11 @@ message GetMultiBlogResponse {
 
 message createBlogRequest {
 	Blog blog =1;
+}
+
+message createBlogResult {
+	string id=1;
+	string error = 404;
 }
 
 message Blog {

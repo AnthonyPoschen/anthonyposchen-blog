@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+	rpc logIn() returns () {}
+	rpc Authed() returns () {}
+
+}
+
+message user {
+	string id = 1;
+	string name = 2;
+	string password = 3;
+}
