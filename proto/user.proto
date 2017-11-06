@@ -3,13 +3,59 @@ syntax = "proto3";
 package user;
 
 service UserService {
-	rpc logIn() returns () {}
-	rpc Authed() returns () {}
+	rpc LogIn(LogInReq) returns (LogInRes) {}
+	rpc Authed(AuthedReq) returns (AuthedRes) {}
+	rpc ChangePassword(ChangePasswordReq) returns (ChangePasswordRes) {}
+	rpc RefreshToken(RefreshTokenReq) returns (RefreshTokenRes) {}
+}
 
+
+message LogInReq {
+	string username = 1;
+	string password = 2;
+	bool keepLoggedIn = 3;
+}
+
+message LogInRes {
+	user user = 1;
+	bool ok = 2;
+	string error = 3;
+}
+
+message AuthedReq {
+	string token =1;
+
+}
+message AuthedRes {
+	user user = 1;
+	bool ok = 2;
+	string error = 3;
+}
+
+message ChangePasswordReq {
+	string id = 1;
+	string oldPassword = 2;
+	string newPassword = 3;
+	string token = 4;
+}
+
+message ChangePasswordRes {
+	bool ok = 1;
+	string error = 2;
+}
+
+message RefreshTokenReq {
+	string token = 1;
+}
+message RefreshTokenRes {
+	user user =1;
+	bool ok = 2;
+	string error = 3;
 }
 
 message user {
 	string id = 1;
-	string name = 2;
-	string password = 3;
+	string username = 2;
+	string token = 4;
+	bool remember = 5;
 }
