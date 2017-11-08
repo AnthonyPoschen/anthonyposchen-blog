@@ -1,6 +1,7 @@
 goservices=(
 	helloworld
 	frontend
+	user
 )
 
 tsFrontendservices=(
