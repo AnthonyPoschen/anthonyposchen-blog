@@ -1,0 +1,11 @@
+box: nodesource/trusty
+
+build:
+  steps:
+    - script:
+      name: cd ./services/frontend/web
+      code: cd ./services/frontend/web
+    - npm-install
+    - script: 
+      name: build
+      code: npm run-script build
