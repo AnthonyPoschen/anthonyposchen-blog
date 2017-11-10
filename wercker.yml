@@ -6,7 +6,7 @@ build-node:
       name: node version
       code: node --version
 build-go:
-  box: google/golang
+  box: golang:latest
   steps:
     - script:
       name: go version
