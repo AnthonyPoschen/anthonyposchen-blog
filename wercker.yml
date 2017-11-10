@@ -1,11 +1,13 @@
 box: nodesource/trusty
 
-build:
+build-node:
   steps:
     - script:
-      name: cd ./services/frontend/web
-      code: cd ./services/frontend/web
-    - npm-install
-    - script: 
-      name: build
-      code: npm run-script build
+      name: node version
+      code: node --version
+build-go:
+  box: google/golang
+  steps:
+    - script:
+      name: go version
+      code: go version
