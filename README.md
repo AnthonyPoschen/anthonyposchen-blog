@@ -4,5 +4,5 @@ Each service contains the server implementation and the only thing that should b
 
 micro-service setup, docker containers need to be setup with atomatic wrecker local dev???. Thus allowing identical local and deploy setup. 
 
-AWS new app load balancer with routing based on domain or url path?. 
+AWS new app load balancer with routing based on domain or url path?.  
 
