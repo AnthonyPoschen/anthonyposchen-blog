@@ -3,7 +3,7 @@ syntax = "proto3";
 package blog;
 
 service BlogService {
-	rpc getBlog(GetBlogRequest) returns (BlogResponse) {}
+	rpc getBlog(GetBlogRequest) returns (GetBlogResponse) {}
 	rpc getMultiBlog(GetMultiBlogRequest) returns (GetMultiBlogResponse) {}
 	rpc createBlog(createBlogRequest) returns (createBlogResult) {}
 	rpc deleteBlog(delBlogRequest) returns (delBlogResult) {}
@@ -63,4 +63,13 @@ message Filter {
 	Type type = 1;
 	string value = 2;
 	string details = 3;
+}
+
+message delBlogRequest {
+	int64 ID = 1;
+}
+
+message delBlogResult {
+	bool ok = 1;
+	string error = 2;
 }
