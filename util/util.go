@@ -5,8 +5,12 @@ import (
 )
 
 type service struct {
-	URL  string
-	Host string
+	// URL is used for other services to contact this service
+	// this url could be drastically different than expected
+	// because of amazon routing options or on a local machine
+	URL string
+
+	// Port is used for the service to listen too.
 	Port string
 }
 
@@ -17,7 +21,10 @@ type envData struct {
 		Pass string
 	}
 	Services struct {
-		User     service
+		// User handles all authentication and logging in.
+		User service
+		// Frontend is the main entry point for all API calls.
+		// and for all page serving.
 		Frontend service
 		Blog     service
 	}
@@ -33,19 +40,19 @@ func GetENV() envData {
 	res.DB.Pass = os.Getenv("DB_PASS")
 
 	res.Services.User = service{
-		Host: os.Getenv("SERVICE_USER_HOST"),
+		//Host: os.Getenv("SERVICE_USER_HOST"),
 		Port: os.Getenv("SERVICE_USER_PORT"),
 		URL:  os.Getenv("SERVICE_USER_HOST") + ":" + os.Getenv("SERVICE_USER_PORT"),
 	}
 
 	res.Services.Blog = service{
-		Host: os.Getenv("SERVICE_BLOG_HOST"),
+		//Host: os.Getenv("SERVICE_BLOG_HOST"),
 		Port: os.Getenv("SERVICE_BLOG_PORT"),
 		URL:  os.Getenv("SERVICE_BLOG_HOST") + ":" + os.Getenv("SERVICE_BLOG_PORT"),
 	}
 
 	res.Services.Frontend = service{
-		Host: os.Getenv("SERVICE_FRONTEND_HOST"),
+		//Host: os.Getenv("SERVICE_FRONTEND_HOST"),
 		Port: os.Getenv("SERVICE_FRONTEND_PORT"),
 		URL:  os.Getenv("SERVICE_FRONTEND_HOST") + ":" + os.Getenv("SERVICE_FRONTEND_PORT"),
 	}

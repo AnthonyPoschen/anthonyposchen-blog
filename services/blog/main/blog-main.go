@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"net/http"
+	"log"
+	"net"
 
 	pb "github.com/zanven42/anthonyposchen-blog/services/blog"
-
+	"github.com/zanven42/anthonyposchen-blog/util"
 	"google.golang.org/grpc"
 )
 
@@ -29,12 +30,15 @@ func (s *server) DeleteBlog(ctx context.Context, in *pb.DelBlogRequest) (*pb.Del
 }
 
 func main() {
+	env := util.GetENV()
+	port := env.Services.Blog.Port
+
 	// start grpc web host here
-
-	// setup the blog service for remote access.
-	// only from internal access points.
-
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		log.Fatalln(err)
+	}
 	grpcServer := grpc.NewServer()
 	pb.RegisterBlogServiceServer(grpcServer, &server{})
-	fmt.Println(http.ListenAndServe(":8082", grpcServer))
+	fmt.Println(grpcServer.Serve(lis))
 }
