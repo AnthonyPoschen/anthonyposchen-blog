@@ -12,8 +12,11 @@ import { TodoFilter, TODO_FILTER_LOCATION_HASH } from '../../constants/todos';
 
 // GRPC imports
 import { grpc, BrowserHeaders, Code } from 'grpc-web-client'
-import { HelloService } from '../../../services/helloworld_pb_service'
-import { HelloRequest, HelloResponse } from '../../../services/helloworld_pb'
+//import { HelloService } from '../../../services/helloworld_pb_service'
+//import { HelloRequest, HelloResponse } from '../../../services/helloworld_pb'
+
+import { testMsg, ServiceRequest, ServiceResponse, ServiceName } from '../../../services/frontend_pb'
+import { FrontendService } from '../../../services/frontend_pb_service'
 
 export interface TodoAppProps extends RouteComponentProps<any> {
   /** MobX Stores will be injected via @inject() **/
@@ -46,17 +49,20 @@ export class TodoApp extends React.Component<TodoAppProps, TodoAppState> {
 
   loadGrpcTodo() {
     const todoStore = this.props[STORE_TODO] as TodoStore;
-    var request = new HelloRequest;
-    request.setName("hello from react + mobx")
-    grpc.unary(HelloService.sayHello, {
+    var request = new testMsg;
+    console.log("Sending test Message")
+    request.setText("hello from react + mobx")
+    grpc.unary(FrontendService.test, {
       request: request,
       // Change host to your backend url / port
       host: window.location.origin,
       onEnd: res => {
         const { status, statusMessage, headers, message, trailers } = res;
         if (status == Code.OK && message) {
-          var result = message as HelloResponse
-          todoStore.addTodo(new TodoModel(result.getMessage()))
+          var result = message as testMsg
+          todoStore.addTodo(new TodoModel(result.getText()))
+        } else {
+          console.log(statusMessage);
         }
       }
     })

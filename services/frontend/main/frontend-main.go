@@ -11,15 +11,19 @@ import (
 
 	"github.com/gobuffalo/packr"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	pb "github.com/zanven42/anthonyposchen-blog/services/helloworld"
+	pb "github.com/zanven42/anthonyposchen-blog/services/frontend"
 	"google.golang.org/grpc"
 )
 
 // server implements the grpc service of helloworld.
 type server struct{}
 
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, error) {
-	return &pb.HelloResponse{Message: in.Name + " and go + grpc"}, nil
+func (s *server) Test(ctx context.Context, in *pb.TestMsg) (*pb.TestMsg, error) {
+	return &pb.TestMsg{Text: in.Text + " and go + grpc"}, nil
+}
+
+func (s *server) GetServiceURL(ctx context.Context, in *pb.ServiceRequest) (*pb.ServiceResponse, error) {
+	return &pb.ServiceResponse{Url: "TestUrl"}, nil
 }
 
 // Handlers holds routes and variables utilised within the routes.
@@ -39,7 +43,7 @@ func main() {
 	// create grpc server
 	grpcServer := grpc.NewServer()
 	// register our service onto the grpc server. (can register many services if needed)
-	pb.RegisterHelloServiceServer(grpcServer, &server{})
+	pb.RegisterFrontendServiceServer(grpcServer, &server{})
 
 	// wrap our grpc server in grpc-web so the frontend can talk to it.
 	wrappedServer := grpcweb.WrapServer(grpcServer)

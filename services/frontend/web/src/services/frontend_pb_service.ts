@@ -14,4 +14,12 @@ export namespace FrontendService {
     static readonly requestType = frontend_pb.testMsg;
     static readonly responseType = frontend_pb.testMsg;
   }
+  export class getServiceURL {
+    static readonly methodName = "getServiceURL";
+    static readonly service = FrontendService;
+    static readonly requestStream = false;
+    static readonly responseStream = false;
+    static readonly requestType = frontend_pb.ServiceRequest;
+    static readonly responseType = frontend_pb.ServiceResponse;
+  }
 }

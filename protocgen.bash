@@ -1,17 +1,14 @@
 goservices=(
-	helloworld
 	frontend
 	user
 	blog
 )
 
 tsFrontendservices=(
-	helloworld
 	frontend
 )
 #admin section as its own SPA seperate from main blog.
 tsAdminServices=(
-	helloworld
 )
 
 for service in ${goservices[@]} 

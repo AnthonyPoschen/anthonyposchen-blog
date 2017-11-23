@@ -4,8 +4,22 @@ package frontend;
 
 service FrontendService {
 	rpc test(testMsg) returns (testMsg) {}
+	rpc getServiceURL(ServiceRequest) returns (ServiceResponse) {}
 }
 
 message testMsg {
 	string text = 1;
+}
+
+message ServiceRequest {
+	ServiceName name =1;
+}
+message ServiceResponse {
+	string url = 1;
+}
+
+enum ServiceName {
+	NONE = 0;
+	BLOG = 1;
+	USER = 2;
 }
